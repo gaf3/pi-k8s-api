@@ -1,0 +1,31 @@
+swagger: '2.0'
+info:
+  title: Example API
+  version: "0.1"
+consumes:
+  - application/json
+produces:
+- application/json
+paths:
+  /item:
+    get:
+      operationId: service.item_list
+      tags: [Items]
+      summary: Get all items
+      responses:
+        200:
+          description: Return items
+  /item/{item_id}:
+    get:
+      operationId: service.item_retrieve
+      tags: [Items]
+      summary: Get an item
+      parameters:
+        - name: item_id
+          description: Item's id
+          in: path
+          type: integer
+          required: true
+      responses:
+        200:
+          description: Return item
