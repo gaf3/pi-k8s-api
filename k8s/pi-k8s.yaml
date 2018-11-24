@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pi-k8s-api
+  namespace: fitches
+  labels:
+    app: pi-k8s-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pi-k8s-api
+  template:
+    metadata:
+      labels:
+        app: pi-k8s-api
+    spec:
+      containers:
+      - name: rest
+        image: docker.io/gaf3/pi-k8s-api:0.1
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 6589
+        readinessProbe:
+          initialDelaySeconds: 5
+          httpGet:
+            path: /health
+            port: 6589
+        livenessProbe:
+          initialDelaySeconds: 2
+          periodSeconds: 5
+          httpGet:
+            path: /health
+            port: 6589
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: pi-k8s-api
+  namespace: fitches
+spec:
+  selector:
+    app: pi-k8s-api
+  ports:
+  - protocol: TCP
+    port: 6589
+    targetPort: 6589
