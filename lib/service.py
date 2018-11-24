@@ -22,6 +22,10 @@ ITEMS = [
     }
 ]
 
+def health():
+
+    return {"message": "OK"}
+
 def item_list():
 
     return ITEMS
@@ -32,5 +36,5 @@ def item_retrieve(item_id):
         if item["id"] == item_id:
             return item
 
-    return {"message": "Not Found"}, 404
+    return {"message": f"item {item_id} not found"}, 404
 

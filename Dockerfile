@@ -1,4 +1,6 @@
-FROM python:3.6-alpine3.6
+FROM resin/raspberry-pi-alpine-python:3.6.1
+
+COPY entry.sh /usr/bin/entry.sh
 
 RUN mkdir -p /opt/pi-k8s
 

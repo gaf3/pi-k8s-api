@@ -7,6 +7,14 @@ consumes:
 produces:
 - application/json
 paths:
+  /health:
+    get:
+      operationId: service.health
+      tags: [Health]
+      summary: Health check
+      responses:
+        200:
+          description: We're good
   /item:
     get:
       operationId: service.item_list
